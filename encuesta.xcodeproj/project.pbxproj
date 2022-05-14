@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8600D323282F1C2D00A80EE9 /* CapturaEncuesta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8600D322282F1C2D00A80EE9 /* CapturaEncuesta.swift */; };
 		86C572BE27DC346D003C7CC4 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C572BD27DC346D003C7CC4 /* File.swift */; };
 		86D5206927D6BF31001207CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D5206827D6BF31001207CD /* AppDelegate.swift */; };
 		86D5206B27D6BF31001207CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D5206A27D6BF31001207CD /* ViewController.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8600D322282F1C2D00A80EE9 /* CapturaEncuesta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturaEncuesta.swift; sourceTree = "<group>"; };
 		86C572BD27DC346D003C7CC4 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		86D5206527D6BF31001207CD /* encuesta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = encuesta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86D5206827D6BF31001207CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				86D5207127D6BF33001207CD /* LaunchScreen.storyboard */,
 				86D5207427D6BF33001207CD /* Info.plist */,
 				86C572BD27DC346D003C7CC4 /* File.swift */,
+				8600D322282F1C2D00A80EE9 /* CapturaEncuesta.swift */,
 			);
 			path = encuesta;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8600D323282F1C2D00A80EE9 /* CapturaEncuesta.swift in Sources */,
 				86D5206B27D6BF31001207CD /* ViewController.swift in Sources */,
 				86C572BE27DC346D003C7CC4 /* File.swift in Sources */,
 				86D5206927D6BF31001207CD /* AppDelegate.swift in Sources */,

@@ -65,6 +65,8 @@ class ViewController: UIViewController {
     
     var estadoEncuesta = EstadoEncuesta.InformacionGeneral
     
+    var capturaEncuesta = CapturaEncuesta(id_tipo_usuario: 1, matricula: nil, numero_profesor: nil, numero_empleado: nil, nombre: "", correo: "", contacto_covid: false, vacunado: false)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         vwInfoGeneral.alpha = 1.0
@@ -136,6 +138,23 @@ class ViewController: UIViewController {
                 lblRetroInfoGeneral.text = "*Es necesario ingresar correo electrónico"
             }
             if (todoBien) {
+                capturaEncuesta.id_tipo_usuario = scTipoUsuario.selectedSegmentIndex + 1
+                
+                capturaEncuesta.numero_empleado = nil
+                capturaEncuesta.numero_profesor = nil
+                capturaEncuesta.matricula = nil
+                if capturaEncuesta.id_tipo_usuario == 1 {
+                    capturaEncuesta.matricula = txtMatricula.text!
+                } else if capturaEncuesta.id_tipo_usuario == 2 {
+                    capturaEncuesta.numero_profesor = txtMatricula.text!
+                } else {
+                    capturaEncuesta.numero_empleado = txtMatricula.text!
+                }
+                capturaEncuesta.nombre = txtNombre.text!
+                capturaEncuesta.correo = txtCorreo.text!
+                
+                print(capturaEncuesta)
+                
                 UIView.animate(withDuration: 0.3, animations: {
                     self.vwInfoGeneral.alpha = 0.0
                     self.vwVacuna.alpha = 0.0
@@ -154,6 +173,8 @@ class ViewController: UIViewController {
                 lblRetroContagio.isHidden = false
                 lblRetroContagio.text = "*Es necesario contestar la pregunta"
             } else {
+                capturaEncuesta.contacto_covid = contactoCovid == .Si ? true : false
+                print(capturaEncuesta)
                 UIView.animate(withDuration: 0.3, animations: {
                     self.vwInfoGeneral.alpha = 0.0
                     self.vwVacuna.alpha = 0.0
@@ -183,7 +204,38 @@ class ViewController: UIViewController {
                 lblRetroVacunado.isHidden = false
                 lblRetroVacunado.text = "*Es necesario contestar la pregunta"
             } else {
-                UIView.animate(withDuration: 0.3, animations: {
+                do {
+                    capturaEncuesta.vacunado = vacunado == .Si ? true : false
+                    print(capturaEncuesta)
+                    
+                    let url = URL(string: "http://172.31.194.159:8000/api/capturas")!
+                    var solicitud = URLRequest(url: url)
+                    solicitud.httpMethod = "POST"
+                    solicitud.allHTTPHeaderFields = [
+                        "Accept" : "application/json",
+                        "Content-Type" : "application/json"
+                    ]
+                    
+                    let jsonData = try JSONEncoder().encode(capturaEncuesta)
+                    
+                    solicitud.httpBody = jsonData
+                    
+                    let task = URLSession.shared.dataTask(with: solicitud) {
+                        data , request, error in
+                        if let data = data {
+                            print(data)
+                            DispatchQueue.main.async {
+                                //Lo que queremos actualizar
+                            }
+                        } else if let error = error {
+                            print(error.localizedDescription)
+                        }
+                    }
+                    task.resume()
+                } catch {
+                    print("No se pudo codificar objeto en JSON c:")
+                }
+                /*UIView.animate(withDuration: 0.3, animations: {
                     self.vwInfoGeneral.alpha = 1.0
                     self.vwVacuna.alpha = 0.0
                     self.vwPreguntas.alpha = 0.0
@@ -191,7 +243,7 @@ class ViewController: UIViewController {
                     self.estadoEncuesta = .InformacionGeneral
                     self.btnSiguiente.setTitle("Siguiente", for: .normal)
                     self.pvProgresoEncuesta.progress = 0.0
-                })
+                })*/
                 
             }
         }
